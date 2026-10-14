@@ -13,7 +13,7 @@ from typing import Dict, Set
 
 ## NOTE: this is copied from upstream
 ## https://github.com/spack/spack-packages/pull/7027
-class Celeritas(CMakePackage, CudaPackage, ROCmPackage):
+class CeleritasBuiltin(CMakePackage, CudaPackage, ROCmPackage):
     """Celeritas is a new Monte Carlo transport code designed for
     high-performance (GPU-targeted) simulation of high-energy physics
     detectors.
@@ -295,7 +295,7 @@ class Celeritas(CMakePackage, CudaPackage, ROCmPackage):
         )
 
 
-class Larceler(Celeritas):
+class Celeritas(CeleritasBuiltin):
     # Override variant defaults
     variant("covfie", default=False, description="Use fields")
     variant("hepmc3", default=False, description="Directly load from HepMC3")
