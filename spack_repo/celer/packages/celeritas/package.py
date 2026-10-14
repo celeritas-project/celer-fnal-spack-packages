@@ -246,12 +246,10 @@ class CeleritasBuiltin(CMakePackage, CudaPackage, ROCmPackage):
 
         # NOTE: package names are stylized like the dependency asks: Find{pkg}.cmake
         # and spack variants (with some exceptions, extensible by subclass) are just lowercase versions
-        print(self.celer_variant_packages())
         for pkg in sorted(self.celer_variant_packages()):
             args.append(
                 from_variant("CELERITAS_USE_" + pkg, self.package_to_variant(pkg)),
             )
-        print(self.celer_force_packages())
         for pkg, val in sorted(self.celer_force_packages().items()):
             args.append(define("CELERITAS_USE_" + pkg, val))
 
