@@ -1,3 +1,7 @@
 repo:
   namespace: 'celer'
   api: v2.4
+# Requires FNAL spack fork
+# Implicitly required repos:
+# - https://github.com/LArSoft/larsoft-spack-recipes.git
+# - https://github.com/FNALssi/fnal_art.git
