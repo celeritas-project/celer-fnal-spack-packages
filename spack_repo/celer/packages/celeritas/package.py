@@ -122,6 +122,7 @@ class CeleritasBuiltin(CMakePackage, CudaPackage, ROCmPackage):
     depends_on("swig@4.1:", when="+swig")
 
     depends_on("python", when="@:0.5", type="build")
+    depends_on("googletest", type="test")
     depends_on("python", type="test")
 
     with default_args(when="+doc", type="build"):
@@ -241,7 +242,7 @@ class CeleritasBuiltin(CMakePackage, CudaPackage, ROCmPackage):
             from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
             from_variant("CELERITAS_DEBUG", "debug"),
             from_variant("CELERITAS_BUILD_DOCS", "doc"),
-            define("CELERITAS_BUILD_TESTS", False),
+            define("CELERITAS_BUILD_TESTS", self.run_tests),
         ]
 
         # NOTE: package names are stylized like the dependency asks: Find{pkg}.cmake
@@ -317,6 +318,6 @@ class Celeritas(CeleritasBuiltin):
 
     @sanitize_paths
     def setup_run_environment(self, env):
-        spec = self.spec["larceler"]
+        spec = self.spec["celeritas"]
         env.prepend_path("CET_PLUGIN_PATH", spec.libs.directories[0]) # lib or lib64
         env.prepend_path("FHICL_FILE_PATH", spec.prefix.fcl)
